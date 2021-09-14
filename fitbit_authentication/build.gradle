@@ -4,6 +4,7 @@ plugins {
     id 'maven-publish'
 }
 apply plugin: "org.jmailen.kotlinter"
+apply plugin: 'maven-publish'
 android {
     compileSdk 30
 
@@ -46,7 +47,7 @@ afterEvaluate {
                 // You can then customize attributes of the publication as shown below.
                 groupId = 'com.coding.casa.fitbit_authentication'
                 artifactId = 'final'
-                version = '1.0'
+                version = '1.0.0'
             }
             // Creates a Maven publication called “debug”.
             debug(MavenPublication) {
@@ -55,7 +56,7 @@ afterEvaluate {
 
                 groupId = 'com.coding.casa.fitbit_authentication'
                 artifactId = 'final-debug'
-                version = '1.0'
+                version = '1.0.0'
             }
         }
     }
