@@ -45,6 +45,11 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
 
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier "sources"
+}
+
 // Because the components are created only during the afterEvaluate phase, you must
 // configure your publications using the afterEvaluate() lifecycle method.
 afterEvaluate {
@@ -60,14 +65,13 @@ afterEvaluate {
                 artifactId = 'fitbit_authentication'
                 version = '0.0.1'
             }
-            // Creates a Maven publication called “debug”.
-            debug(MavenPublication) {
-                // Applies the component for the debug build variant.
-                from components.debug
 
+            mavenAar(MavenPublication) {
                 groupId = 'com.coding.casa'
-                artifactId = 'fitbit_authentication-debug'
+                artifactId = 'fitbit_authentication'
                 version = '0.0.1'
+                artifact(sourceJar)
+                from components.release
             }
         }
     }
