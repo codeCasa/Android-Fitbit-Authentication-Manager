@@ -1,16 +1,15 @@
 package com.coding.casa.fitbit_authentication.authentication
 
 import android.os.Handler
+import android.os.Looper
 import android.util.Base64
 import com.coding.casa.fitbit_authentication.configuration.ClientCredentials
+import com.coding.casa.fitbit_authentication.request.BasicHttpRequestBuilder.Companion.create
 import java.io.IOException
 import java.nio.charset.Charset
-import android.os.Looper
-import com.coding.casa.fitbit_authentication.request.BasicHttpRequestBuilder.Companion.create
 import java.util.concurrent.Callable
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
-
 
 internal class TaskRunner {
     private val executor: Executor =
@@ -31,7 +30,7 @@ internal class TaskRunner {
 internal class LogoutTask(
     private val clientCredentials: ClientCredentials,
     private val accessToken: AccessToken?,
-): Callable<String> {
+) : Callable<String> {
     override fun call(): String {
         val tokenString = String.format(
             "%s:%s",
@@ -54,7 +53,7 @@ internal class LogoutTask(
             .build()
         return try {
             val response = request.execute()
-            if(response.isSuccessful){""}else{response.bodyAsString}
+            if (response.isSuccessful) { "" } else { response.bodyAsString }
         } catch (e: IOException) {
             e.message ?: ""
         }

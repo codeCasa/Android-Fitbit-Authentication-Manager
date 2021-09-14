@@ -49,9 +49,9 @@ class AuthenticationConfigurationBuilder {
         require(hasSetClientCredentials) { "Error: client credentials not set! You must set client credentials with valid client id, client secret, and redirect url" }
         require(
             (
-                    authenticationConfiguration.requiredScopes!!.size +
-                            authenticationConfiguration.optionalScopes!!.size
-                    ) != 0
+                authenticationConfiguration.requiredScopes!!.size +
+                    authenticationConfiguration.optionalScopes!!.size
+                ) != 0
         ) { "You must specify at least one oauth2 scope in `requiredScopes` or `optionalScopes`" }
         return authenticationConfiguration
     }

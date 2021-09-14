@@ -27,10 +27,10 @@ class ClientCredentials : Parcelable {
 
     val isComplete: Boolean
         get() = (
-                !TextUtils.isEmpty(clientId) &&
-                        !TextUtils.isEmpty(clientSecret) &&
-                        !TextUtils.isEmpty(redirectUrl)
-                )
+            !TextUtils.isEmpty(clientId) &&
+                !TextUtils.isEmpty(clientSecret) &&
+                !TextUtils.isEmpty(redirectUrl)
+            )
 
     override fun describeContents(): Int {
         return 0

@@ -8,9 +8,13 @@ import com.coding.casa.fitbit_authentication.managers.AuthenticationManager
 import com.coding.casa.fitbit_authentication.ui.LoginActivity
 import java.util.HashSet
 
-class FitbitAuthenticationManager(context: Context, secretKey: String, preferenceName: String,
-                                  private val redirectUrl: String,
-                                  private val successCallbackUrl: String) :
+class FitbitAuthenticationManager(
+    context: Context,
+    secretKey: String,
+    preferenceName: String,
+    private val redirectUrl: String,
+    private val successCallbackUrl: String
+) :
     AuthenticationManager(context, secretKey, preferenceName) {
 
     override fun login(activity: Activity) {
@@ -31,27 +35,28 @@ class FitbitAuthenticationManager(context: Context, secretKey: String, preferenc
 
     override fun logout(activity: Activity, onSuccess: (() -> Unit)?, onError: (() -> Unit)?) {
         checkIsConfigured()
-        if(!isLoggedIn) {
+        if (!isLoggedIn) {
             return
         }
-       configuration.clientCredentials?.let { _credentials ->
-           TaskRunner().executeAsync(LogoutTask(_credentials, accessToken),
-               object : TaskRunner.Callback<String> {
-                   override fun onComplete(result: String) {
-                       val beforeLoginActivity =
-                           configuration.beforeLoginActivity
-                       if (beforeLoginActivity != null) {
-                           activity.startActivity(beforeLoginActivity)
-                       }
-                       if(result.isEmpty()) {
-                           onSuccess?.invoke()
-                           return
-                       }
-                       onError?.invoke()
-                   }
-
-               })
-       }
+        configuration.clientCredentials?.let { _credentials ->
+            TaskRunner().executeAsync(
+                LogoutTask(_credentials, accessToken),
+                object : TaskRunner.Callback<String> {
+                    override fun onComplete(result: String) {
+                        val beforeLoginActivity =
+                            configuration.beforeLoginActivity
+                        if (beforeLoginActivity != null) {
+                            activity.startActivity(beforeLoginActivity)
+                        }
+                        if (result.isEmpty()) {
+                            onSuccess?.invoke()
+                            return
+                        }
+                        onError?.invoke()
+                    }
+                }
+            )
+        }
         authenticationResult = null
         accessToken = null
     }
@@ -63,12 +68,12 @@ class FitbitAuthenticationManager(context: Context, secretKey: String, preferenc
         onAuthenticationFinished: (result: AuthenticationResult) -> Unit
     ) {
         checkIsConfigured()
-        if(data == null && authenticationResult == null) {
+        if (data == null && authenticationResult == null) {
             onAuthenticationFinished(AuthenticationResult.dismissed())
             return
         }
         when (requestCode) {
-             loginRequestCode -> {
+            loginRequestCode -> {
                 if (resultCode == Activity.RESULT_OK || resultCode == Activity.RESULT_CANCELED) {
                     var authenticationResult: AuthenticationResult? =
                         data?.getParcelableExtra(LoginActivity.AUTHENTICATION_RESULT_KEY) ?: AuthenticationManager.authenticationResult

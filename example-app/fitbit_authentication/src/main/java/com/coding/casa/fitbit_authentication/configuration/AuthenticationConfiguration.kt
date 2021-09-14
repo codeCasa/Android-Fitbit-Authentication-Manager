@@ -2,7 +2,6 @@ package com.coding.casa.fitbit_authentication.configuration
 
 import android.content.Intent
 
-
 class AuthenticationConfiguration internal constructor() {
     var clientCredentials: ClientCredentials? = null
     var requiredScopes: MutableSet<Scope>? =

@@ -4,19 +4,18 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebView
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
+import androidx.appcompat.app.AppCompatActivity
 import com.coding.casa.fitbit_authentication.R
 import com.coding.casa.fitbit_authentication.authentication.AuthenticationChangedHandler
 import com.coding.casa.fitbit_authentication.authentication.AuthenticationResult
 import com.coding.casa.fitbit_authentication.configuration.ClientCredentials
 import com.coding.casa.fitbit_authentication.configuration.Scope
 import com.coding.casa.fitbit_authentication.managers.AuthenticationManager
-import java.util.*
 
 internal class LoginActivity : AppCompatActivity() {
     private lateinit var loginWebView: WebView
@@ -58,7 +57,7 @@ internal class LoginActivity : AppCompatActivity() {
     private fun onAuthFinished(result: AuthenticationResult) {
         loginWebView.visibility = View.GONE
         val resultIntent = Intent()
-        if(result.isSuccessful) {
+        if (result.isSuccessful) {
             AuthenticationManager.authenticationResult = result
         }
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)

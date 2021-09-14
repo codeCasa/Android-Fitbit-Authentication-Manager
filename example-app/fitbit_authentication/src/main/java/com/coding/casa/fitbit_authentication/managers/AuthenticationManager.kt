@@ -21,7 +21,7 @@ abstract class AuthenticationManager(context: Context, secretKey: String, prefer
     var accessToken: AccessToken? = null
         get() {
             checkIsConfigured()
-            if(field == null) {
+            if (field == null) {
                 field = AccessToken.fromBase64(preferences.getString(AUTH_TOKEN_KEY))
             }
             return field
@@ -29,12 +29,12 @@ abstract class AuthenticationManager(context: Context, secretKey: String, prefer
         protected set(currentAccessToken) {
             checkIsConfigured()
             field = currentAccessToken
-            if(currentAccessToken != null) {
+            if (currentAccessToken != null) {
                 preferences.put(
                     AUTH_TOKEN_KEY,
                     currentAccessToken.toBase64String()
                 )
-            }else {
+            } else {
                 preferences.removeValue(AUTH_TOKEN_KEY)
             }
         }
@@ -58,7 +58,7 @@ abstract class AuthenticationManager(context: Context, secretKey: String, prefer
 
     abstract fun login(activity: Activity)
     abstract fun logout(activity: Activity, onSuccess: (() -> Unit)? = null, onError: (() -> Unit)? = null)
-    abstract fun onActivityResult(requestCode:Int, resultCode: Int, data: Intent?, onAuthenticationFinished: (result: AuthenticationResult) -> Unit)
+    abstract fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?, onAuthenticationFinished: (result: AuthenticationResult) -> Unit)
 
     companion object {
 

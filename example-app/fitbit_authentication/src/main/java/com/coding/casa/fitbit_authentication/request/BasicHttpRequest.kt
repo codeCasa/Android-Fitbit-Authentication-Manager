@@ -2,7 +2,11 @@ package com.coding.casa.fitbit_authentication.request
 
 import android.text.TextUtils
 import androidx.core.util.Pair
-import java.io.*
+import java.io.ByteArrayOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
+import java.io.UnsupportedEncodingException
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
@@ -77,8 +81,8 @@ class BasicHttpRequest internal constructor() {
         for (pair in params!!) {
             keyValues.add(
                 URLEncoder.encode(pair.first, "UTF-8") +
-                        "=" +
-                        URLEncoder.encode(pair.second, "UTF-8")
+                    "=" +
+                    URLEncoder.encode(pair.second, "UTF-8")
             )
         }
         return TextUtils.join("&", keyValues)

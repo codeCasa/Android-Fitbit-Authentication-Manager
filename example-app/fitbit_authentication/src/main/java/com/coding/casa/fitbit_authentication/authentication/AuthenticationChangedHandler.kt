@@ -10,7 +10,7 @@ import com.coding.casa.fitbit_authentication.configuration.ClientCredentials
 import com.coding.casa.fitbit_authentication.configuration.Scope
 import com.coding.casa.fitbit_authentication.ui.UrlChangedHandler
 import com.coding.casa.fitbit_authentication.ui.WebViewEventHandler
-import java.util.*
+import java.util.Locale
 import java.util.regex.Pattern
 
 class AuthenticationChangedHandler(
@@ -46,7 +46,7 @@ class AuthenticationChangedHandler(
     }
 
     private fun parseScopes(scopes: String?): List<Scope> {
-        if(scopes.isNullOrBlank()){
+        if (scopes.isNullOrBlank()) {
             return emptyList()
         }
         val scopesArray = scopes.split(" ").toTypedArray()
@@ -69,9 +69,9 @@ class AuthenticationChangedHandler(
         val accessToken = uri.getQueryParameter("access_token")
         val userId = uri.getQueryParameter("user_id")
         val expiresOn = (
-                uri.getQueryParameter("expires_in")
-                    ?.toLong() ?: 0
-                ) + System.currentTimeMillis() / 1000
+            uri.getQueryParameter("expires_in")
+                ?.toLong() ?: 0
+            ) + System.currentTimeMillis() / 1000
         val scopes =
             parseScopes(uri.getQueryParameter("scope"))
         val accessTokenObject = AccessToken(accessToken, userId, expiresOn, scopes)
@@ -157,7 +157,7 @@ class AuthenticationChangedHandler(
         }
 
         private fun parseScopes(scopes: String?): List<Scope> {
-            if(scopes.isNullOrBlank()){
+            if (scopes.isNullOrBlank()) {
                 return emptyList()
             }
             val scopesArray = scopes.split(" ").toTypedArray()
@@ -180,9 +180,9 @@ class AuthenticationChangedHandler(
             val accessToken = uri.getQueryParameter("access_token")
             val userId = uri.getQueryParameter("user_id")
             val expiresOn = (
-                    uri.getQueryParameter("expires_in")
-                        ?.toLong() ?: 0
-                    ) + System.currentTimeMillis() / 1000
+                uri.getQueryParameter("expires_in")
+                    ?.toLong() ?: 0
+                ) + System.currentTimeMillis() / 1000
             val scopes =
                 parseScopes(uri.getQueryParameter("scope"))
             val accessTokenObject = AccessToken(accessToken, userId, expiresOn, scopes)
