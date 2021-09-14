@@ -3,7 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'maven-publish'
 }
-//apply plugin: "org.jmailen.kotlinter"
+apply plugin: "org.jmailen.kotlinter"
 android {
     compileSdk 30
 
