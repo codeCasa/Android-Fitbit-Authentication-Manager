@@ -24,12 +24,11 @@ internal class AuthenticationChangedHandler(
         expiresIn: Long,
         scopes: Set<Scope>?,
         redirectUrl: String,
-        successCallbackUrl: String
     ) {
         val webSettings = webView.settings
         webSettings.domStorageEnabled = true
         webSettings.javaScriptEnabled = true
-        webView.webViewClient = WebViewEventHandler(this, redirectUrl, successCallbackUrl)
+        webView.webViewClient = WebViewEventHandler(this, redirectUrl)
         val url = String.format(
             Locale.ENGLISH,
             AUTHORIZE_URL_FORMAT,

@@ -4,11 +4,31 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.text.TextUtils
 
+/**
+ * The credentials for the Fitbit application
+ */
 class ClientCredentials : Parcelable {
+    /**
+     * @property clientId The Fitbit client id
+     */
     var clientId: String?
+
+    /**
+     * @property clientSecret The Fitbit client secret
+     */
     var clientSecret: String?
+
+    /**
+     * @property redirectUrl The Fitbit redirect url
+     */
     var redirectUrl: String?
 
+    /**
+     * Creates a instance of client credentials
+     * @param clientId The Fitbit client id
+     * @param clientSecret The Fitbit client secret
+     * @param redirectUrl The Fitbit redirect url
+     */
     constructor(
         clientId: String?,
         clientSecret: String?,

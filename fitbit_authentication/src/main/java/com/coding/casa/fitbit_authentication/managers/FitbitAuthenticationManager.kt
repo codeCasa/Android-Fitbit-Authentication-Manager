@@ -15,7 +15,6 @@ class FitbitAuthenticationManager(
     secretKey: String,
     preferenceName: String,
     private val redirectUrl: String,
-    private val successCallbackUrl: String
 ) :
     AuthenticationManager(context, secretKey, preferenceName) {
 
@@ -29,8 +28,7 @@ class FitbitAuthenticationManager(
             configuration.clientCredentials!!,
             configuration.tokenExpiresIn,
             scopes,
-            redirectUrl,
-            successCallbackUrl
+            redirectUrl
         )
         activity.startActivityForResult(intent, loginRequestCode)
     }
