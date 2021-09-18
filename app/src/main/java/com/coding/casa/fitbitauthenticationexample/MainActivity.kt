@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.coding.casa.fitbit_authentication.authentication.AuthenticationResult
-import com.coding.casa.fitbit_authentication.authentication.FitbitAuthenticationManager
+import com.coding.casa.fitbit_authentication.managers.FitbitAuthenticationManager
 import com.coding.casa.fitbit_authentication.configuration.AuthenticationConfiguration
 import com.coding.casa.fitbit_authentication.configuration.AuthenticationConfigurationBuilder
 import com.coding.casa.fitbit_authentication.configuration.ClientCredentials

@@ -13,7 +13,7 @@ import com.coding.casa.fitbit_authentication.ui.WebViewEventHandler
 import java.util.Locale
 import java.util.regex.Pattern
 
-class AuthenticationChangedHandler(
+internal class AuthenticationChangedHandler(
     private val webView: WebView,
     private val clientCredentials: ClientCredentials,
     private val authenticationHandler: (result: AuthenticationResult) -> Unit,
