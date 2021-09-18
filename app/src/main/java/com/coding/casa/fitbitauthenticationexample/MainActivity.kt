@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.coding.casa.fitbit_authentication.authentication.AuthenticationResult
-import com.coding.casa.fitbit_authentication.authentication.FitbitAuthenticationManager
+import com.coding.casa.fitbit_authentication.managers.FitbitAuthenticationManager
 import com.coding.casa.fitbit_authentication.configuration.AuthenticationConfiguration
 import com.coding.casa.fitbit_authentication.configuration.AuthenticationConfigurationBuilder
 import com.coding.casa.fitbit_authentication.configuration.ClientCredentials
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        authenticationManager = FitbitAuthenticationManager(this, "SOME_SECRET_KEY", "PREF_NAME", "redirect uri", "success callback")
+        authenticationManager = FitbitAuthenticationManager(this, "SOME_SECRET_KEY", "PREF_NAME", "strongfoundation://fitbit")
         authenticationManager.configure(generateAuthenticationConfiguration(), 12)
         loginBtn = findViewById(R.id.loginBtn)
         loginBtn.setOnClickListener {
@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
             when(it.status) {
                 AuthenticationResult.Status.Successful -> {
                     Snackbar.make(loginBtn, "Successfully logged in", Snackbar.LENGTH_SHORT).show()
-                    print(authenticationManager.accessToken)
                     loginBtn.text = "Logout"
                 }
                 AuthenticationResult.Status.Dismissed -> {

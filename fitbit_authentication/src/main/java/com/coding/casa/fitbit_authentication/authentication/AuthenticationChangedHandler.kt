@@ -13,7 +13,7 @@ import com.coding.casa.fitbit_authentication.ui.WebViewEventHandler
 import java.util.Locale
 import java.util.regex.Pattern
 
-class AuthenticationChangedHandler(
+internal class AuthenticationChangedHandler(
     private val webView: WebView,
     private val clientCredentials: ClientCredentials,
     private val authenticationHandler: (result: AuthenticationResult) -> Unit,
@@ -24,12 +24,11 @@ class AuthenticationChangedHandler(
         expiresIn: Long,
         scopes: Set<Scope>?,
         redirectUrl: String,
-        successCallbackUrl: String
     ) {
         val webSettings = webView.settings
         webSettings.domStorageEnabled = true
         webSettings.javaScriptEnabled = true
-        webView.webViewClient = WebViewEventHandler(this, redirectUrl, successCallbackUrl)
+        webView.webViewClient = WebViewEventHandler(this, redirectUrl)
         val url = String.format(
             Locale.ENGLISH,
             AUTHORIZE_URL_FORMAT,

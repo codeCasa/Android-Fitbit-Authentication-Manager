@@ -44,7 +44,7 @@ internal class LoginActivity : AppCompatActivity() {
                 this::onAuthFinished,
                 uri
             )
-            authorizationController.authenticate(expiresIn, scopesSet, redirectUrl, successCallbackUrl)
+            authorizationController.authenticate(expiresIn, scopesSet, redirectUrl)
         } else {
             AuthenticationChangedHandler.authenticate(uri.toString(), redirectUrl, this::onAuthFinished)
         }
@@ -73,7 +73,6 @@ internal class LoginActivity : AppCompatActivity() {
         private const val SCOPES_KEY = "SCOPES_KEY"
 
         private var redirectUrl: String = ""
-        private var successCallbackUrl: String = ""
 
         fun createIntent(
             context: Context?,
@@ -81,10 +80,8 @@ internal class LoginActivity : AppCompatActivity() {
             @Nullable expiresIn: Long?,
             scopes: Set<Scope>,
             redirectUrl: String,
-            successCallbackUrl: String
         ): Intent {
             this.redirectUrl = redirectUrl
-            this.successCallbackUrl = successCallbackUrl
             val intent = Intent(context, LoginActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
             intent.putExtra(CLIENT_CREDENTIALS_KEY, clientCredentials)

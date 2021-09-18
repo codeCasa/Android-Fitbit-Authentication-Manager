@@ -1,10 +1,12 @@
-package com.coding.casa.fitbit_authentication.authentication
+package com.coding.casa.fitbit_authentication.managers
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import com.coding.casa.fitbit_authentication.authentication.AuthenticationResult
+import com.coding.casa.fitbit_authentication.authentication.LogoutTask
+import com.coding.casa.fitbit_authentication.authentication.TaskRunner
 import com.coding.casa.fitbit_authentication.configuration.Scope
-import com.coding.casa.fitbit_authentication.managers.AuthenticationManager
 import com.coding.casa.fitbit_authentication.ui.LoginActivity
 import java.util.HashSet
 
@@ -13,7 +15,6 @@ class FitbitAuthenticationManager(
     secretKey: String,
     preferenceName: String,
     private val redirectUrl: String,
-    private val successCallbackUrl: String
 ) :
     AuthenticationManager(context, secretKey, preferenceName) {
 
@@ -27,8 +28,7 @@ class FitbitAuthenticationManager(
             configuration.clientCredentials!!,
             configuration.tokenExpiresIn,
             scopes,
-            redirectUrl,
-            successCallbackUrl
+            redirectUrl
         )
         activity.startActivityForResult(intent, loginRequestCode)
     }

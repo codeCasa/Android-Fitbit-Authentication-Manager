@@ -9,7 +9,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.browser.customtabs.CustomTabsIntent
 
-internal class WebViewEventHandler(private val urlChangeHandler: UrlChangedHandler, private val redirectUrl: String, private val successCallbackUrl: String) :
+internal class WebViewEventHandler(private val urlChangeHandler: UrlChangedHandler, private val redirectUrl: String) :
     WebViewClient() {
     override fun shouldOverrideUrlLoading(
         view: WebView,
@@ -27,7 +27,7 @@ internal class WebViewEventHandler(private val urlChangeHandler: UrlChangedHandl
     }
 
     private fun loadUrl(view: WebView, url: String): Boolean {
-        if (url.contains(successCallbackUrl) || url.contains(redirectUrl)) {
+        if (url.contains(redirectUrl)) {
             view.loadUrl(url)
             urlChangeHandler.onUrlChanged(url)
             return false

@@ -5,14 +5,38 @@ import android.os.Parcelable
 import android.util.Base64
 import com.coding.casa.fitbit_authentication.configuration.Scope
 import java.util.ArrayList
-
+/**
+* Object model representation of Fitbit Access token
+*/
 class AccessToken : Parcelable {
+    /**
+     *  @property accessToken Fitbit access token to put in Fitbit API request
+     */
     var accessToken: String?
+
+    /**
+     * @property userId Fitbit user id of authenticated user
+     */
     var userId: String?
+
+    /**
+     * @property expirationDate Access token expiration date in seconds
+     */
     var expirationDate: Long
+
+    /**
+     * @property scopes List of approved user scopes
+     */
     var scopes: List<Scope>? =
         ArrayList()
 
+    /**
+     * Creates a Fitbit access token model
+     * @param accessToken The Fitbit access token
+     * @param userId The fitbit user id of the authenticated user
+     * @param expirationDate Access token expiration date in seconds
+     * @param scopes List of approved user scopes
+     */
     constructor(
         accessToken: String?,
         userId: String?,
@@ -34,6 +58,9 @@ class AccessToken : Parcelable {
         scopes = parcelScopes
     }
 
+    /**
+     * @return true if the access token has expired
+     */
     fun hasExpired(): Boolean {
         return expirationDate < System.currentTimeMillis() / 1000
     }
@@ -49,6 +76,10 @@ class AccessToken : Parcelable {
         parcel.writeTypedList(scopes?.toMutableList() ?: mutableListOf())
     }
 
+    /**
+     * Converts the Access Token model into a base64 encoded string
+     * @return The access token model as a base64 encoded string
+     */
     fun toBase64String(): String {
         val parcel = Parcel.obtain()
         writeToParcel(parcel, 0)
@@ -69,6 +100,12 @@ class AccessToken : Parcelable {
             }
         }
 
+        /**
+         * Converts a base64 encoded string into an access token model
+         * @param base64String The base64 encoded AccessToken model
+         *
+         * @return The access token model
+         */
         fun fromBase64(base64String: String?): AccessToken? {
             if (base64String == null) {
                 return null
