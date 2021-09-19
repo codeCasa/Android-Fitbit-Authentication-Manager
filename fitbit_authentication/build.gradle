@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'maven-publish'
 }
 apply plugin: "org.jmailen.kotlinter"
 group = 'com.github.codeCasa'
@@ -49,30 +50,25 @@ task sourceJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier "sources"
 }
-
-// Because the components are created only during the afterEvaluate phase, you must
-// configure your publications using the afterEvaluate() lifecycle method.
-//afterEvaluate {
-//    publishing {
-//        publications {
-//            // Creates a Maven publication called "release".
-//            release(MavenPublication) {
-//                // Applies the component for the release build variant.
-//                from components.release
-//
-//                // You can then customize attributes of the publication as shown below.
-//                groupId = 'com.coding.casa'
-//                artifactId = 'fitbit_authentication'
-//                version = '0.0.1'
-//            }
-//
-//            mavenAar(MavenPublication) {
-//                groupId = 'com.coding.casa'
-//                artifactId = 'fitbit_authentication'
-//                version = '0.0.1'
-//                artifact(sourceJar)
-//                from components.release
-//            }
-//        }
-//    }
-//}
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.release
+                groupId = 'com.coding.casa'
+                artifactId = 'fitbit_authentication'
+                version = '1.0'
+            }
+            // Creates a Maven publication called “debug”.
+            debug(MavenPublication) {
+                // Applies the component for the debug build variant.
+                from components.debug
+                artifactId = 'fitbit_authentication-debug'
+                groupId = 'com.coding.casa'
+                version = '1.0'
+            }
+        }
+    }
+}
